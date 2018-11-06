@@ -3,26 +3,7 @@
 #include <WebServer.h>
 #include <FastLED.h>
 #include <ezTime.h>
-
-#define WIFI_SSID        "WIFI"
-#define WIFI_PSK         "thepasswordispassword"
-#define HOSTNAME         "salarium"
-#define OTA_PW           "salarium"
-
-#define TZ               "America/Los_Angeles"
-
-#define WEB_PORT         80
-
-#define LED_TYPE    WS2811
-#define COLOR_ORDER GRB
-#define DATA_PIN    15
-#define BRIGHTNESS  255
-#define FPS         500
-
-#define BORDER      1
-#define WIDTH       15
-#define HEIGHT      10
-#define NUM_LEDS    (WIDTH*HEIGHT)
+#include <salariumConfig.h>
 
 
 Timezone tz;
@@ -275,8 +256,8 @@ void setup() {
   delay(100);
 
   //OTA
-  ArduinoOTA.setPort(8266);
   ArduinoOTA.setHostname(HOSTNAME);
+  ArduinoOTA.setPort(OTA_PORT);
   ArduinoOTA.setPassword(OTA_PW);
   ArduinoOTA.onStart([]() {
     fill_solid(leds, NUM_LEDS, CRGB::Black);
